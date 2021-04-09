@@ -85,4 +85,13 @@ until game_over == true
 
   puts
 
+  x = rand(8)
+  case x
+  when 3
+    puts "#{player2} Wins!"
+    break
+  when 2
+    puts "#{player1} Wins!"
+    break
+  end
 end
