@@ -30,3 +30,9 @@ def player_name
     player_name
   end
 end
+
+puts "Player 1 Enter your name"
+player1 = player_name
+puts "Player 2 Enter your name"
+player2 = player_name
+
