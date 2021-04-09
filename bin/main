@@ -59,9 +59,17 @@ until game_over == true
   game_board[position-1] = 'X'
   display_board(game_board)
 
+  if game_board.all?(/[a-zA-Z]/)
+    game_over = true
+    puts "GAME OVER"
+    break
+  end
+
   puts "It's #{player2}'s turn to play"
   position = user_position
   game_board[position-1] = 'O'
   display_board(game_board)
+
+  
   
 end
