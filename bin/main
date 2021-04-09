@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 puts 'WELCOME TO TIC TAC TOE!'
 puts
@@ -23,10 +24,12 @@ puts display_board(game_board)
 def player_name
   name = gets.chomp
 
-  return name if name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
-
-  puts 'Enter a valid name, minimum of 3 letters!'
-  player_name
+  if name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
+    name
+  else
+    puts 'Enter a valid name, minimum of 3 letters!'
+    player_name
+  end
 end
 
 puts 'Player 1 Enter your name'
@@ -46,31 +49,41 @@ puts
 
 puts 'Get ready to start the game'
 
-def user_position
+puts
+
+def user_position(game_board)
   position = gets.chomp.to_i
 
-  return position if position.between?(0, 10)
-
-  puts 'Enter a valid position'
-  user_position
+  if position.between?(1, 9) && game_board[position - 1].is_a?(Integer)
+    position
+  else
+    puts 'Invalid move. Please select a number from 1 to 9'
+    user_position(game_board)
+  end
 end
 
 game_over = false
 until game_over == true
   puts "It's #{player1}'s turn to play"
-  position = user_position
+  puts 'Please select an available cell from the board(1-9)'
+  position = user_position(game_board)
   game_board[position - 1] = 'X'
   display_board(game_board)
 
+  puts
+
   if game_board.all?(/[a-zA-Z]/)
     game_over = true
-    puts 'GAME OVER'
+    puts 'IT IS A TIE, GAME OVER'
     break
   end
 
   puts "It's #{player2}'s turn to play"
-  position = user_position
+  puts 'Please select an available cell from the board(1-9)'
+  position = user_position(game_board)
   game_board[position - 1] = 'O'
   display_board(game_board)
+
+  puts
 
 end
