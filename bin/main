@@ -33,11 +33,18 @@ end
 
 puts 'Player 1 Enter your name'
 player1 = player_name
+sleep(1)
 puts 'Player 2 Enter your name'
 player2 = player_name
+sleep(1)
+
+puts 
 
 puts "#{player1} you will be playing with the symbol 'X'."
+puts
 puts "#{player2} you will be playing with the symbol 'O'."
+
+puts
 
 puts 'Get ready to start the game'
 
