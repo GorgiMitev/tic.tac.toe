@@ -36,3 +36,5 @@ player1 = player_name
 puts "Player 2 Enter your name"
 player2 = player_name
 
+puts "#{player1} you will be playing with the symbol 'X'."
+puts "#{player2} you will be playing with the symbol 'O'."
