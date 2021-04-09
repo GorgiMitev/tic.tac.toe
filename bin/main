@@ -24,6 +24,7 @@ def player_name
   name = gets.chomp
 
   return name if name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
+
   puts 'Enter a valid name, minimum of 3 letters!'
   player_name
 end
@@ -49,6 +50,7 @@ def user_position
   position = gets.chomp.to_i
 
   return position if position.between?(0, 10)
+  
   puts 'Enter a valid position'
   user_position
 end
