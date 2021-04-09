@@ -18,3 +18,15 @@ def display_board(game_board)
 end
 
 puts display_board(game_board)
+
+puts
+
+def player_name
+  name = gets.chomp
+  if name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
+    return name
+  else
+    puts "Enter a valid name, minimum of 3 letters!"
+    player_name
+  end
+end
