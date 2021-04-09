@@ -16,3 +16,5 @@ def display_board(game_board)
   puts "| #{game_board[6]} | #{game_board[7]} | #{game_board[8]} |"
   puts "+---+---+---+"
 end
+
+puts display_board(game_board)
