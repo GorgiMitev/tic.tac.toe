@@ -2,7 +2,6 @@
 
 # frozen_string_literal: true
 
-# welcoming message to players
 puts 'WELCOME TO TIC TAC TOE!'
 puts
 puts 'THIS BELOW WILL BE YOUR GAMEBOARD!'
