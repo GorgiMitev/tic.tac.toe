@@ -26,7 +26,6 @@ def player_name
   return name if name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
   puts 'Enter a valid name, minimum of 3 letters!'
   player_name
-
 end
 
 puts 'Player 1 Enter your name'
@@ -52,7 +51,6 @@ def user_position
   return position if position.between?(0, 10)
   puts 'Enter a valid position'
   user_position
-
 end
 
 game_over = false
