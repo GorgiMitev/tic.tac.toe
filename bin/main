@@ -1,20 +1,20 @@
 #!/usr/bin/env ruby
 # welcoming message to players
-puts "WELCOME TO TIC TAC TOE!"
+puts 'WELCOME TO TIC TAC TOE!'
 puts
-puts "THIS BELOW WILL BE YOUR GAMEBOARD!"
+puts 'THIS BELOW WILL BE YOUR GAMEBOARD!'
 puts
- 
+
 game_board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def display_board(game_board)
-  puts "+---+---+---+"
+  puts '+---+---+---+'
   puts "| #{game_board[0]} | #{game_board[1]} | #{game_board[2]} |"
-  puts "+---+---+---+"
+  puts '+---+---+---+'
   puts "| #{game_board[3]} | #{game_board[4]} | #{game_board[5]} |"
-  puts "+---+---+---+"
+  puts '+---+---+---+'
   puts "| #{game_board[6]} | #{game_board[7]} | #{game_board[8]} |"
-  puts "+---+---+---+"
+  puts '+---+---+---+'
 end
 
 puts display_board(game_board)
@@ -26,15 +26,27 @@ def player_name
   if name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
     return name
   else
-    puts "Enter a valid name, minimum of 3 letters!"
+    puts 'Enter a valid name, minimum of 3 letters!'
     player_name
   end
 end
 
-puts "Player 1 Enter your name"
+puts 'Player 1 Enter your name'
 player1 = player_name
-puts "Player 2 Enter your name"
+puts 'Player 2 Enter your name'
 player2 = player_name
 
 puts "#{player1} you will be playing with the symbol 'X'."
 puts "#{player2} you will be playing with the symbol 'O'."
+
+puts 'Get ready to start the game'
+
+def user_position
+  position = gets.chomp.to_i
+  if position.between?(0, 10)
+    return position
+  else
+    puts 'Enter a valid position'
+    user_position
+  end
+end
