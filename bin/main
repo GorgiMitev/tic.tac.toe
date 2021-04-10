@@ -1,2 +1,97 @@
 #!/usr/bin/env ruby
-puts 'Hello World'
+
+puts 'WELCOME TO TIC TAC TOE!'
+puts
+puts 'THIS BELOW WILL BE YOUR GAMEBOARD!'
+puts
+
+game_board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+def display_board(game_board)
+  s = "      +---+---+---+
+      | #{game_board[0]} | #{game_board[1]} | #{game_board[2]} |
+      +---+---+---+
+      | #{game_board[3]} | #{game_board[4]} | #{game_board[5]} |
+      +---+---+---+
+      | #{game_board[6]} | #{game_board[7]} | #{game_board[8]} |
+      +---+---+---+"
+  puts s
+end
+
+puts display_board(game_board)
+
+def player_name
+  name = gets.chomp
+
+  if name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
+    name
+  else
+    puts 'Enter a valid name, minimum of 3 letters!'
+    player_name
+  end
+end
+
+puts 'Player 1 Enter your name'
+player1 = player_name
+sleep(1)
+puts 'Player 2 Enter your name'
+player2 = player_name
+sleep(1)
+
+puts
+
+puts "#{player1} you will be playing with the symbol 'X'."
+puts
+puts "#{player2} you will be playing with the symbol 'O'."
+
+puts
+
+puts 'Get ready to start the game'
+
+puts
+
+def user_position(game_board)
+  position = gets.chomp.to_i
+
+  if position.between?(1, 9) && game_board[position - 1].is_a?(Integer)
+    position
+  else
+    puts 'Invalid move. Please select a number from 1 to 9'
+    user_position(game_board)
+  end
+end
+
+game_over = false
+until game_over == true
+  puts "It's #{player1}'s turn to play"
+  puts 'Please select an available cell from the board(1-9)'
+  position = user_position(game_board)
+  game_board[position - 1] = 'X'
+  display_board(game_board)
+
+  puts
+
+  if game_board.all?(/[a-zA-Z]/)
+    game_over = true
+    puts 'IT IS A TIE, GAME OVER'
+    break
+  end
+
+  puts "It's #{player2}'s turn to play"
+  puts 'Please select an available cell from the board(1-9)'
+  position = user_position(game_board)
+  game_board[position - 1] = 'O'
+  display_board(game_board)
+
+  puts
+
+  x = rand(8)
+  case x
+  when 3
+    puts "#{player2} Wins!"
+    break
+  when 2
+    puts "#{player1} Wins!"
+    break
+  end
+end
