@@ -6,11 +6,6 @@ class Game
   include GameLogic
   attr_accessor :game_board
 
-  puts 'WELCOME TO TIC TAC TOE!'
-  puts
-  puts 'THIS BELOW WILL BE YOUR GAMEBOARD!'
-  puts
-
   def initialize(player1, player2)
     @game_board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     @player1 = player1
@@ -20,15 +15,16 @@ class Game
     @player2_turn = []
     @win_sequence = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
     @win = false
+    @game_over = false
   end
 
-  def display_board(game_board)
+  def display_board
     s = "      +---+---+---+
-        | #{game_board[0]} | #{game_board[1]} | #{game_board[2]} |
+        | #{@game_board[0]} | #{@game_board[1]} | #{@game_board[2]} |
         +---+---+---+
-        | #{game_board[3]} | #{game_board[4]} | #{game_board[5]} |
+        | #{@game_board[3]} | #{@game_board[4]} | #{@game_board[5]} |
         +---+---+---+
-        | #{game_board[6]} | #{game_board[7]} | #{game_board[8]} |
+        | #{@game_board[6]} | #{@game_board[7]} | #{@game_board[8]} |
         +---+---+---+"
     puts s
   end
@@ -37,31 +33,29 @@ class Game
     name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
   end
 
-  puts display_board(game_board)
+  puts display_board(@game_board)
 
-  def player_name
-    name = gets.chomp
+  def game_intro
 
-    if name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
-      name
-    else
-      puts 'Enter a valid name, minimum of 3 letters!'
-      player_name
-    end
+  puts 'WELCOME TO TIC TAC TOE!'
+  puts
+  puts 'THIS BELOW WILL BE YOUR GAMEBOARD!'
+  puts
+  
   end
 
   puts 'Player 1 Enter your name'
-  player1 = player_name
+  @player1 = player_name
   sleep(1)
   puts 'Player 2 Enter your name'
-  player2 = player_name
+  @player2 = player_name
   sleep(1)
 
   puts
 
-  puts "#{player1} you will be playing with the symbol 'X'."
+  puts "#{@player1} you will be playing with the symbol 'X'."
   puts
-  puts "#{player2} you will be playing with the symbol 'O'."
+  puts "#{@player2} you will be playing with the symbol 'O'."
 
   puts
 
@@ -69,49 +63,28 @@ class Game
 
   puts
 
-  def user_position(game_board)
-    position = gets.chomp.to_i
-
-    if position.between?(1, 9) && game_board[position - 1].is_a?(Integer)
-      position
-    else
-      puts 'Invalid move. Please select a number from 1 to 9'
-      user_position(game_board)
-    end
-  end
-
-  game_over = false
-  until game_over == true
-    puts "It's #{player1}'s turn to play"
+  until @game_over == true
+    puts "It's #{@player1}'s turn to play"
     puts 'Please select an available cell from the board(1-9)'
-    position = user_position(game_board)
-    game_board[position - 1] = 'X'
-    display_board(game_board)
+    position = user_position(@game_board)
+    @game_board[position - 1] = 'X'
+    display_board(@game_board)
 
     puts
 
-    if game_board.all?(/[a-zA-Z]/)
-      game_over = true
+    if @game_board.all?(/[a-zA-Z]/)
+      @game_over = true
       puts 'IT IS A TIE, GAME OVER'
       break
     end
 
     puts "It's #{player2}'s turn to play"
     puts 'Please select an available cell from the board(1-9)'
-    position = user_position(game_board)
-    game_board[position - 1] = 'O'
-    display_board(game_board)
+    position = user_position(@game_board)
+    @game_board[position - 1] = 'O'
+    display_board(@game_board)
 
     puts
 
-    x = rand(8)
-    case x
-    when 3
-      puts "#{player2} Wins!"
-      break
-    when 2
-      puts "#{player1} Wins!"
-      break
-    end
   end
 end
