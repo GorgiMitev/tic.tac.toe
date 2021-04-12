@@ -64,16 +64,19 @@ class Game
   puts "#{@player1} you will be playing with the symbol 'X'."
   puts
   puts "#{@player2} you will be playing with the symbol 'O'."
-
   puts
   puts 'Get ready to start the game'
   end
+
+  def draw
+    puts "IT'S A DRAW, GAME OVER! BETTER LUCK NEXT TIME"
+  end
+
   
   
 
  
 
-  puts
 
   until @game_over == true
     puts "It's #{@player1}'s turn to play"
