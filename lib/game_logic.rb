@@ -1,4 +1,5 @@
 module GameLogic
+  
   def count_turns
     @turns = @player1_turn + @player2_turn
   end
@@ -12,7 +13,8 @@ module GameLogic
     end
   end
 
-  def winner.each do |sequence|
+  def winner
+    win_sequence.each do |sequence|
     player1_wins if sequence - @player1_turn == []
     @win = true if sequence - @player1_turn == []
   
