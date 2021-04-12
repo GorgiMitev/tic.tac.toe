@@ -16,7 +16,7 @@ module GameLogic
   end
 
   def winner
-    win_sequence.each do |sequence|
+  @win_sequence.each do |sequence|
     player1_wins if sequence - @player1_turn == []
     @win = true if sequence - @player1_turn == []
   
