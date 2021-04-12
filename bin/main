@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-require_relative '../lib/game_logic'
-require_relative '../lib/player'
+require_relative('../lib/game_logic')
+require_relative('../lib/player')
 
 class Game
   include GameLogic
@@ -104,5 +104,32 @@ class Game
          display_board(@game_board)
          puts
     end
+  end
+
+
+  def game_flow
+    count = 0
+
+    while count < 9
+      player1_turn
+      count_turns
+      count += 1
+      winner
+      break if count == 9 || @win == true
+
+      player2_turn
+      count_turns
+      count += 1
+      winner
+      break if @win == true
+
+      draw unless @win == true
+      display_board
+
+    end
+
+      
+
+
   end
   end
