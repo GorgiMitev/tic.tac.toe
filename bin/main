@@ -36,21 +36,27 @@ class Game
   puts display_board(@game_board)
 
   def game_intro
+    puts 'WELCOME TO TIC TAC TOE!'
+    puts
+    puts 'THIS BELOW WILL BE YOUR GAMEBOARD!'
+    puts
 
-  puts 'WELCOME TO TIC TAC TOE!'
-  puts
-  puts 'THIS BELOW WILL BE YOUR GAMEBOARD!'
-  puts
-  
+    puts 'Player 1 Enter your name'
+    @player1 = gets.chomp
+    until player_name(@player1)
+      puts 'Name needs to be longer than 3 letters'
+      @player1 = gets.chomp
+    end
+    sleep(1)
+
+    puts 'Player 2 Enter your name'
+    @player2 = gets.chomp
+    until player_name(@player2)
+      puts 'Name needs to be longer than 3 letters'
+      @player2 = gets.chomp
+    end
   end
-
-  puts 'Player 1 Enter your name'
-  @player1 = player_name
-  sleep(1)
-  puts 'Player 2 Enter your name'
-  @player2 = player_name
-  sleep(1)
-
+  
   puts
 
   puts "#{@player1} you will be playing with the symbol 'X'."
