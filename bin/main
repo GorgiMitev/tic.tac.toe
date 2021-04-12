@@ -55,9 +55,8 @@ class Game
       puts 'Name needs to be longer than 3 letters'
       @player2 = gets.chomp
     end
-  end
-  
-  puts
+
+    puts
 
   @first_player = Player.new(@player1, 'X')
   @second_player = Player.new(@player2, 'O')
@@ -67,8 +66,12 @@ class Game
   puts "#{@player2} you will be playing with the symbol 'O'."
 
   puts
-
   puts 'Get ready to start the game'
+  end
+  
+  
+
+ 
 
   puts
 
