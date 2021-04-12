@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
-require_relative('../lib/game_logic')
-require_relative('../lib/player')
-require_relative('../lib/board')
+require_relative '../lib/player' 
+require_relative '../lib/board' 
+require_relative '../lib/game_logic' 
 
 class Game
   include GameLogic
@@ -12,7 +12,6 @@ class Game
     @player2_turn = []
     @win_sequence = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
     @win = false
-    @game_over = false
   end
 
   def game_intro
@@ -23,8 +22,8 @@ class Game
 
     puts 'Player 1 Enter your name'
     @player1 = gets.chomp
-    until Board.player_name(@player1)
-      puts 'Name needs to be longer than 3 letters'
+    until display_board.player_name(@player1)
+      puts "Please enter a name that is longer than 3 letters"
       @player1 = gets.chomp
     end
     sleep(1)
@@ -32,7 +31,7 @@ class Game
     puts 'Player 2 Enter your name'
     @player2 = gets.chomp
     until Board.player_name(@player2)
-      puts 'Name needs to be longer than 3 letters'
+      puts "Please enter a name that is longer than 3 letters"
       @player2 = gets.chomp
     end
 
@@ -41,18 +40,19 @@ class Game
     @first_player = Player.new(@player1, 'X')
     @second_player = Player.new(@player2, 'O')
     @game_board = Board.new(@first_player, @second_player).game_board
+    
     puts
 
-    puts "#{@player1} you will be playing with the symbol 'X'."
+    puts "#{@first_player.name} you will be playing with the marker #{first_player.marker}."
     puts
-    puts "#{@player2} you will be playing with the symbol 'O'."
+    puts "#{@second_player.name} you will be playing with the marker #{second_player.marker}."
     puts
     puts 'Get ready to start the game'
   end
 
   def display_board
     puts '+----+------+-----+-----+'
-    puts "|   #{@game_board[0]}   |   #{@game_board[1]}   |   #{@game_board[2]}   "
+    puts "|   #{@game_board[0]}   |   #{@game_board[1]}   |   #{@game_board[2]} "
     puts '+----+------+-----+-----+'
     puts "|   #{@game_board[3]}   |   #{@game_board[4]}   |   #{@game_board[5]}   "
     puts '+----+------+-----+-----+'
@@ -66,36 +66,42 @@ class Game
   end
 
   def player1_wins
-    puts "#{@player1} is the winner. Congratulations!"
+    puts "#{@first_player.name} wins!. Congratulations!"
   end
 
   def player2_wins
-    puts "#{@player2} is the winner. Congratulations!"
+    puts "#{@second_player.name} wins!. Congratulations!"
   end
 
   def player1_turn
     puts "It's #{@player1}'s turn to play"
     puts 'Please select an available cell from the board(1-9)'
-    player1_num = gets.chomp
-    if user_position(player1_num) == false
-      puts 'Invalid move! Please pick a number between 1 & 9:'
-    else user_position(player1_num) == true
-         @game_board[position - 1] = 'X'
-         display_board(@game_board)
-         puts
+    loop do
+      player1_num = gets.chomp
+      @player1_turn << player1_num.to_i if user_position(player1_num) == true
+      puts 'Invalid move! Please pick a number between 1 & 9' if user_position(player1_num) == false
+      next unless user_position(player1_num) == true
+
+      cell = @game_board.find { |el| el == player1_num.to_i }
+      @game_board[cell - 1] = @first_player.marker
+      display_board
+      break
     end
   end
 
   def player2_turn
     puts "It's #{@player2}'s turn to play"
     puts 'Please select an available cell from the board(1-9)'
-    player2_num = gets.chomp
-    if user_position(player2_num) == false
-      puts 'Invalid move! Please pick a number between 1 & 9:'
-    else user_position(player2_num) == true
-         @game_board[position - 1] = 'X'
-         display_board(@game_board)
-         puts
+    loop do
+      player1_num = gets.chomp
+      @player2_turn << player2_num.to_i if user_position(player2_num) == true
+      puts 'Invalid move! Please pick a number between 1 & 9' if user_position(player2_num) == false
+      next unless user_position(player2_num) == true
+
+      cell = @game_board.find { |el| el == player1_num.to_i }
+      @game_board[cell - 1] = @second_player.marker
+      display_board
+      break
     end
   end
 
@@ -119,14 +125,13 @@ class Game
       display_board
 
     end
-
-    def play
-      game_intro
-      display_board
-      game_flow
-    end
-
-    new_game = Game.new
-    new_game.play
   end
+  def play
+    game_intro
+    display_board
+    game_flow
   end
+end
+
+new_game = Game.new
+new_game.play
