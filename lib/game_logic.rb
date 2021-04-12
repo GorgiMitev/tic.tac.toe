@@ -5,10 +5,13 @@ module GameLogic
   
 
   def user_position(position)
-    if position.between?(1, 9).to_i && @turns.any? {|turn| turn == position.to_i}
-      true
-    else
+    if (1..9).none? {|input| input == position.to_i}
       false
+    elsif 
+      @turns.any? {|turn| turn == position.to_i}
+      false
+    else
+      true
     end
   end
 
@@ -22,7 +25,8 @@ module GameLogic
     end
     @win
   end
-  end
+  
+end
 
   
 
