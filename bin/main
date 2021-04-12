@@ -59,6 +59,9 @@ class Game
   
   puts
 
+  @first_player = Player.new(@player1, 'X')
+  @second_player = Player.new(@player2, 'O')
+
   puts "#{@player1} you will be playing with the symbol 'X'."
   puts
   puts "#{@player2} you will be playing with the symbol 'O'."
