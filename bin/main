@@ -72,10 +72,13 @@ class Game
     puts "IT'S A DRAW, GAME OVER! BETTER LUCK NEXT TIME"
   end
 
-  
-  
+  def player1_wins
+    puts "#{@player1} is the winner. Congratulations!"
+  end
 
- 
+  def player2_wins
+    puts "#{@player2} is the winner. Congratulations!"
+  end
 
 
   until @game_over == true
