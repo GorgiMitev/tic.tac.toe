@@ -5,8 +5,5 @@ class Player
     @name = name
     @marker = marker
   end
-
-  def self.player_name(name)
-    name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
-  end
 end
+s
