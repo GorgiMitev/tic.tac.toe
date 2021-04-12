@@ -1,15 +1,12 @@
 #!/usr/bin/env ruby
 require_relative('../lib/game_logic')
 require_relative('../lib/player')
+require_relative('../lib/board')
 
 class Game
   include GameLogic
-  attr_accessor :game_board
 
-  def initialize(player1, player2)
-    @game_board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    @player1 = player1
-    @player2 = player2
+  def initialize
     @turns = []
     @player1_turn = []
     @player2_turn = []
@@ -17,23 +14,6 @@ class Game
     @win = false
     @game_over = false
   end
-
-  def display_board
-    s = "      +---+---+---+
-        | #{@game_board[0]} | #{@game_board[1]} | #{@game_board[2]} |
-        +---+---+---+
-        | #{@game_board[3]} | #{@game_board[4]} | #{@game_board[5]} |
-        +---+---+---+
-        | #{@game_board[6]} | #{@game_board[7]} | #{@game_board[8]} |
-        +---+---+---+"
-    puts s
-  end
-
-  def self.player_name(name)
-    name.length >= 3 && name.split('').all?(/[a-zA-Z]/)
-  end
-
-  puts display_board(@game_board)
 
   def game_intro
     puts 'WELCOME TO TIC TAC TOE!'
@@ -43,7 +23,7 @@ class Game
 
     puts 'Player 1 Enter your name'
     @player1 = gets.chomp
-    until player_name(@player1)
+    until Board.player_name(@player1)
       puts 'Name needs to be longer than 3 letters'
       @player1 = gets.chomp
     end
@@ -51,7 +31,7 @@ class Game
 
     puts 'Player 2 Enter your name'
     @player2 = gets.chomp
-    until player_name(@player2)
+    until Board.player_name(@player2)
       puts 'Name needs to be longer than 3 letters'
       @player2 = gets.chomp
     end
@@ -60,12 +40,25 @@ class Game
 
     @first_player = Player.new(@player1, 'X')
     @second_player = Player.new(@player2, 'O')
+    @game_board = Board.new(@first_player, @second_player).game_board
+    puts
 
     puts "#{@player1} you will be playing with the symbol 'X'."
     puts
     puts "#{@player2} you will be playing with the symbol 'O'."
     puts
     puts 'Get ready to start the game'
+  end
+
+  def display_board
+    puts '+----+------+-----+-----+'
+    puts "|   #{@game_board[0]}   |   #{@game_board[1]}   |   #{@game_board[2]}   "
+    puts '+----+------+-----+-----+'
+    puts "|   #{@game_board[3]}   |   #{@game_board[4]}   |   #{@game_board[5]}   "
+    puts '+----+------+-----+-----+'
+    puts "|   #{@game_board[6]}   |   #{@game_board[7]}   |   #{@game_board[8]}   "
+    puts '+----+------+-----+-----+'
+    @game_board
   end
 
   def draw
@@ -106,7 +99,6 @@ class Game
     end
   end
 
-
   def game_flow
     count = 0
 
@@ -136,8 +128,5 @@ class Game
 
     new_game = Game.new
     new_game.play
-      
-
-
   end
   end

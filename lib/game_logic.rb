@@ -1,5 +1,4 @@
 module GameLogic
-  
   def count_turns
     @turns = @player1_turn + @player2_turn
   end
@@ -32,6 +31,6 @@ module GameLogic
 
 
 
-end
+
 
 
