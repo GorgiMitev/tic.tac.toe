@@ -6,4 +6,3 @@ class Player
     @marker = marker
   end
 end
-s
