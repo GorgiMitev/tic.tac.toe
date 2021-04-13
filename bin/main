@@ -84,8 +84,10 @@ class Game
     puts 'Please select an available cell from the board(1-9)'
     position = gets.chomp.to_i
     if @game_logic.user_position(position) == true
+      @player1_turn << position
       @game_board[position - 1] = 'X'
       display_board
+      player2_turn
     else @game_logic.user_position(position) == false  
          puts 'Invalid move! Please pick a number between 1 & 9:'
     end
@@ -98,8 +100,10 @@ class Game
     puts 'Please select an available cell from the board(1-9)'
     position = gets.chomp.to_i
     if @game_logic.user_position(position) == true
+      @player2_turn << position
       @game_board[position - 1] = 'O'
       display_board
+      player1_turn
     else @game_logic.user_position(position) == false  
          puts 'Invalid move! Please pick a number between 1 & 9:'
     end
