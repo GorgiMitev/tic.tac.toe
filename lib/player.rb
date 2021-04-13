@@ -9,5 +9,4 @@ class Player
   def self.player_name(name)
     name.to_s.length > 3 && name.split('').all?(/[a-zA-Z]/)
   end
-  
 end

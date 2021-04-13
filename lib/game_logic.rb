@@ -1,25 +1,26 @@
-class GameLogic
-  def count_turns(player1_turn, player2_turn)
-    turns = player1_turn + player2_turn
-    return turns
+module GameLogic
+  def turns
+    @turns = @player1_trn + @player2_trn
   end
-  
-  def user_position(position, game_board)
-    if position.between?(1, 9) && game_board[position - 1].is_a?(Integer)
-      true
-    else
+
+  def user_position(cell)
+    if (1..9).none? { |accepted_i| accepted_i == cell.to_i }
       false
+    elsif @turns.any? { |turns| turns == cell.to_i }
+      false
+    else
+      true
     end
   end
 
-  def winner(win_sequence)
-    win_sequence.each do |win_opt|
-      player1_wins if win_opt - @player1_turn == []
-      @win = true if win_opt - @player1_turn == []
-      player2_wins if win_opt - @player2_turn == []
-      @win = true if win_opt - @player2_turn == []
+  def winner
+    @winning_sequence.each do |win|
+      player1_wins if win - @player1_trn == []
+      @win = true if win - @player1_trn == []
+      player2_wins if win - @player2_trn == []
+      @win = true if win - @player2_trn == []
     end
     @win
   end
+  
 end
-
