@@ -107,13 +107,13 @@ class Game
     count = 0
     while count < 9
       player1_turn
-      turns
+      cal_turns
       count += 1
       winner
       break if count == 9 || @win == true
 
       player2_turn
-      turns
+      cal_turns
       count += 1
       winner
       break if @win == true
