@@ -4,9 +4,7 @@ module GameLogic
   end
 
   def user_position(cell)
-    if (1..9).none? { |idx| idx == cell.to_i }
-      false
-    elsif @turns.any? { |turn| turn == cell.to_i }
+    if (1..9).none? { |idx| idx == cell.to_i } || @turns.any? { |turn| turn == cell.to_i }
       false
     else
       true
