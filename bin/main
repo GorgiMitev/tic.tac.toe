@@ -44,9 +44,7 @@ class Game
     @second_player = Player.new(@player2, @second_marker)
     @game_board = Board.new(@first_player, @second_player).game_board
     puts
-
     puts "#{@first_player.name} will play with #{@first_player.marker}."
-    puts
     puts
     puts "#{@second_player.name} will play with #{@second_player.marker}."
     puts

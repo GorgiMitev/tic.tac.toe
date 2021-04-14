@@ -1,5 +1,5 @@
 module GameLogic
-  def turns
+  def cal_turns
     @turns = @player1_trn + @player2_trn
   end
 
