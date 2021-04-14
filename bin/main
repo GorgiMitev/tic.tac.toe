@@ -4,130 +4,125 @@
 require_relative('../lib/player')
 require_relative('../lib/board')
 require_relative('../lib/game_logic')
-
-class Game
-  include GameLogic
-  def initialize
-    @player1_trn = []
-    @player2_trn = []
-    @winning_sequence = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
-    @turns = []
-    @win = false
-    @game_board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  end
-
-  def game_intro
-    puts 'WELCOME TO TIC TAC TOE!'
-    puts
-    puts 'Player 1 Enter your name'
+require_relative('../lib/game')
+# rubocop:disable Metrics/MethodLength
+def game_intro
+  puts 'WELCOME TO TIC TAC TOE!'
+  puts
+  puts 'THIS BELOW WILL BE YOUR GAMEBOARD!'
+  puts
+  puts 'Player 1 Enter your name'
+  @player1 = gets.chomp
+  until Player.player_name(@player1)
+    puts 'Name needs to be longer than 3 letters'
     @player1 = gets.chomp
-    until Player.player_name(@player1)
-      puts 'Name needs to be longer than 3 letters'
-      @player1 = gets.chomp
-    end
-    puts 'Player 2 Enter your name'
+  end
+  puts 'Player 2 Enter your name'
+  @player2 = gets.chomp
+  until Player.player_name(@player2)
+    puts 'Name needs to be longer than 3 letters'
     @player2 = gets.chomp
-    until Player.player_name(@player2)
-      puts 'Name needs to be longer than 3 letters'
-      @player2 = gets.chomp
-    end
-    @first_marker = 'X'
-    @second_marker = 'O'
-    @first_player = Player.new(@player1, @first_marker)
-    @second_player = Player.new(@player2, @second_marker)
-    @game_board = Board.new(@first_player, @second_player).game_board
-    puts
-    puts "#{@first_player.name} will play with #{@first_player.marker}."
-    puts
-    puts "#{@second_player.name} will play with #{@second_player.marker}."
-    puts
-    puts 'Get ready to start the game'
   end
-
-  def display_board
-    puts '+---+---+---+'
-    puts "| #{@game_board[0]} | #{@game_board[1]} | #{@game_board[2]} |"
-    puts '+---+---+---+'
-    puts "| #{@game_board[3]} | #{@game_board[4]} | #{@game_board[5]} |"
-    puts '+---+---+---+'
-    puts "| #{@game_board[6]} | #{@game_board[7]} | #{@game_board[8]} |"
-    puts '+---+---+---+'
-    @game_board
-  end
-
-  def draw
-    puts "#{@first_player.name} & #{@second_player.name} Draw"
-  end
-
-  def player1_wins
-    puts "The Winner is #{@first_player.name}."
-    puts "Better luck next time #{@second_player.name}."
-  end
-
-  def player2_wins
-    puts "The Winner is #{@second_player.name}."
-    puts "Better luck next time #{@first_player.name}."
-  end
-
-  def player1_turn
-    puts "It is #{@player1}'s turn"
-    puts
-    puts 'Please select an available cell number'
-    loop do
-      player1_cell = gets.chomp.to_i
-      @player1_trn << player1_cell if user_position(player1_cell) == true
-      puts 'Invalid move! Please pick a number between 1 & 9:' if user_position(player1_cell) == false
-      next unless user_position(player1_cell) == true
-
-      position = @game_board.find { |el| el == player1_cell }
-      @game_board[position - 1] = @first_player.marker
-      display_board
-      break
-    end
-  end
-
-  def player2_turn
-    puts "It is #{@player2}'s turn"
-    puts
-    puts 'Please select an available cell number'
-    loop do
-      player2_cell = gets.chomp.to_i
-      @player2_trn << player2_cell if user_position(player2_cell) == true
-      puts 'Invalid move! Please pick a number between 1 & 9:' if user_position(player2_cell) == false
-      next unless user_position(player2_cell) == true
-
-      position = @game_board.find { |el| el == player2_cell }
-      @game_board[position - 1] = @second_player.marker
-      display_board
-      break
-    end
-  end
-
-  def game_flow
-    count = 0
-    while count < 9
-      player1_turn
-      cal_turns
-      count += 1
-      winner
-      break if count == 9 || @win == true
-
-      player2_turn
-      cal_turns
-      count += 1
-      winner
-      break if @win == true
-    end
-    draw unless @win == true
-    display_board
-  end
-
-  def play
-    display_board
-    game_intro
-    display_board
-    game_flow
-  end
-  new_game = Game.new
-  new_game.play
+  @first_marker = 'X'
+  @second_marker = 'O'
+  @first_player = Player.new(@player1, @first_marker)
+  @second_player = Player.new(@player2, @second_marker)
+  @game_board = Board.new(@first_player, @second_player).game_board
+  puts
+  puts "#{@first_player.name} will play with #{@first_player.marker}."
+  puts
+  puts "#{@second_player.name} will play with #{@second_player.marker}."
+  puts
+  puts 'Get ready to start the game'
 end
+# rubocop:enable Metrics/MethodLength
+
+def display_board
+  puts '+---+---+---+'
+  puts "| #{@game_board[0]} | #{@game_board[1]} | #{@game_board[2]} |"
+  puts '+---+---+---+'
+  puts "| #{@game_board[3]} | #{@game_board[4]} | #{@game_board[5]} |"
+  puts '+---+---+---+'
+  puts "| #{@game_board[6]} | #{@game_board[7]} | #{@game_board[8]} |"
+  puts '+---+---+---+'
+  @game_board
+end
+
+def draw
+  puts "#{@first_player.name} & #{@second_player.name} Draw"
+end
+
+def player1_wins
+  puts "The Winner is #{@first_player.name}."
+  puts "Better luck next time #{@second_player.name}."
+end
+
+def player2_wins
+  puts "The Winner is #{@second_player.name}."
+  puts "Better luck next time #{@first_player.name}."
+end
+
+def player1_turn
+  puts "It is #{@player1}'s turn"
+  puts
+  puts 'Please select an available cell number'
+  loop do
+    player1_cell = gets.chomp.to_i
+    @player1_trn << player1_cell if user_position(player1_cell) == true
+    puts 'Invalid move! Please pick a number between 1 & 9:' if user_position(player1_cell) == false
+    next unless user_position(player1_cell) == true
+
+    position = @game_board.find { |el| el == player1_cell }
+    @game_board[position - 1] = @first_player.marker
+    display_board
+    break
+  end
+end
+
+def player2_turn
+  puts "It is #{@player2}'s turn"
+  puts
+  puts 'Please select an available cell number'
+  loop do
+    player2_cell = gets.chomp.to_i
+    @player2_trn << player2_cell if user_position(player2_cell) == true
+    puts 'Invalid move! Please pick a number between 1 & 9:' if user_position(player2_cell) == false
+    next unless user_position(player2_cell) == true
+
+    position = @game_board.find { |el| el == player2_cell }
+    @game_board[position - 1] = @second_player.marker
+    display_board
+    break
+  end
+end
+
+def game_flow
+  count = 0
+  while count < 9
+    player1_turn
+    cal_turns
+    count += 1
+    winner
+    break if count == 9 || @win == true
+
+    player2_turn
+    cal_turns
+    count += 1
+    winner
+    break if @win == true
+  end
+  draw unless @win == true
+  display_board
+end
+
+public
+
+def play
+  display_board
+  game_intro
+  display_board
+  game_flow
+end
+
+new_game = Game.new
+new_game.play
