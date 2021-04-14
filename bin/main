@@ -112,6 +112,7 @@ def game_flow
   draw unless @win == true
   display_board
 end
+
 public
 
 def play
