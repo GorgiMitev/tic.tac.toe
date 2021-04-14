@@ -3,7 +3,7 @@ require_relative('../lib/game_logic')
 class Game
   include GameLogic
   attr_reader :player1_trn, :player2_trn, :winning_sequence, :turns, :win, :game_board
-  
+
   def initialize
     @player1_trn = []
     @player2_trn = []
