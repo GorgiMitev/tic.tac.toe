@@ -112,7 +112,6 @@ def game_flow
     break if @win == true
   end
   draw unless @win == true
-  display_board
 end
 
 public
