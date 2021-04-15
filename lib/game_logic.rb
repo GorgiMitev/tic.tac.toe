@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module GameLogic
   def cal_turns
     @turns = @player1_trn + @player2_trn
