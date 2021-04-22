@@ -25,7 +25,7 @@ def game_intro
   end
   @first_marker = 'X'
   @second_marker = 'O'
-  @first_player = Player.new(@player1, @first_marker)
+  @first_player = Player.newL
   @second_player = Player.new(@player2, @second_marker)
   @game_board = Board.new(@first_player, @second_player).game_board
   puts
