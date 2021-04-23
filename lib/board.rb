@@ -1,5 +1,3 @@
-
-
 class Board
   attr_reader :game_board
 

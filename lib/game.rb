@@ -1,5 +1,3 @@
-
-
 class Game
   attr_reader :player1_trn, :player2_trn, :winning_sequence, :turns, :win, :game_board
 
