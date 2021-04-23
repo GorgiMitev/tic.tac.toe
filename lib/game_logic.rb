@@ -1,2 +1,2 @@
-module game_logic
+module GameLogic
 end
