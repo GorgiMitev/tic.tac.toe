@@ -24,9 +24,18 @@ describe "Game" do
       expect(game_logic.user_position(24)).to eq(false)  
     end
 
-    it "returns false if given number is between 1 & 9 but included in given arr" do
+    it "returns false if given number is between 1 & 9 and included in given array" do
       @turns = [4, 8, 1]
       expect(game_logic.user_position(8)).to eq(false)
+    end
+
+    it "returns true if given number is between 1 & 9 and not in given array" do
+      @turns = [1, 5, 7]
+      expect(game_logic.user_position(3)).to eq(true)
+    end
+
+    it "returns false if number given is not integer" do
+      expect(game_logic.user_position("girls")).to eq(false)
     end
     
   end
