@@ -24,9 +24,9 @@ describe "Game" do
       expect(game_logic.user_position(24)).to eq(false)  
     end
 
-    it "returns false if given number is between 1 & 9 and included in given array" do
+    it "returns true if given number is between 1 & 9 and included in given array" do
       @turns = [4, 8, 1]
-      expect(game_logic.user_position(8)).to eq(false)
+      expect(game_logic.user_position(1)).to be true
     end
 
     it "returns true if given number is between 1 & 9 and not in given array" do
@@ -63,5 +63,31 @@ describe "Game" do
       @player2_trn = [1, 4, 8]
       expect(@winning_sequence[1] == @player2_trn).to be (false)
     end
+
+    it "returns false for win method if a player's turn array doesn't match any winning sequence" do
+      @winning_sequence = [[2, 5, 8], [1, 4, 7]]
+      @player1_trn = [4, 3]
+      @player2_trn = [1, 4]
+      @win = false
+      expect(@win).to be false if @winning_sequence[1] - @player1_trn != []
+    end
+
+    it "returns true for win method if the player's turn array matches any winning sequence" do
+      @winning_sequence = [[2, 5, 8], [1, 4, 7]]
+      @player1_trn = [2, 5, 8]
+      @player2_trn = [1, 4]
+      @win = true
+      expect(@win).to be true if @winning_sequence[0] - @player1_trn == []
+    end
+
+    it "returns true for win method if the player's turn array matches any winning sequence" do
+      @winning_sequence = [[2, 5, 8], [1, 4, 7]]
+      @player1_trn = [4, 3]
+      @player2_trn = [1, 4, 7]
+      @win = true
+      expect(@win).to be true if @winning_sequence[1] - @player2_trn == []
+    end
+
+
   end
 end

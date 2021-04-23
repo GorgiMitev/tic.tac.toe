@@ -13,8 +13,8 @@ describe "Player" do
     end
 
     it 'should accept two parameters' do
-      expect{subject}.not_to raise_error ArgumentError
-  end
+      expect{subject}.not_to raise_error
+    end
 
     it "returns true if length of name is longer than 3" do
       expect( Player.player_name(p1.name)).to be true
