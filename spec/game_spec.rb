@@ -46,4 +46,15 @@ describe "Game" do
       expect(game_logic.user_position(12)).to eq(false)
     end
   end
+
+
+  describe "win" do
+
+    it "returns true when a player's_turn array matches a winning sequence" do
+      @winning_sequence = [[2, 5, 8], [1, 4, 7]]
+      @player1_trn = [4, 3, 9]
+      @player2_trn = [1, 4, 7]
+      expect(@winning_sequence[1] - @player2_trn).to eq([])
+    end
+  end
 end
