@@ -38,5 +38,12 @@ describe "Game" do
       expect(game_logic.user_position("girls")).to eq(false)
     end
     
+    it "returns false if number < 1" do
+      expect(game_logic.user_position(-1)).to eq(false)
+    end
+
+    it "returns false if number > 9" do
+      expect(game_logic.user_position(12)).to eq(false)
+    end
   end
 end
