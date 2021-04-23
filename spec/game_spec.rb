@@ -50,11 +50,18 @@ describe "Game" do
 
   describe "win" do
 
-    it "returns true when a player's_turn array matches a winning sequence" do
+    it "returns true when a player's_turn array matches any winning sequence" do
       @winning_sequence = [[2, 5, 8], [1, 4, 7]]
       @player1_trn = [4, 3, 9]
       @player2_trn = [1, 4, 7]
-      expect(@winning_sequence[1] - @player2_trn).to eq([])
+      expect(@winning_sequence[1] == @player2_trn).to be (true)
+    end
+
+    it "returns false when a player's_turn array doesn't match any winning sequence" do
+      @winning_sequence = [[2, 5, 8], [1, 4, 7]]
+      @player1_trn = [4, 3, 9]
+      @player2_trn = [1, 4, 8]
+      expect(@winning_sequence[1] == @player2_trn).to be (false)
     end
   end
 end
