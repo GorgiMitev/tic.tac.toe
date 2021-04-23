@@ -24,6 +24,10 @@ describe "Game" do
       expect(game_logic.user_position(24)).to eq(false)  
     end
 
+    it "returns false if given number is between 1 & 9 but included in given arr" do
+      @turns = [4, 8, 1]
+      expect(game_logic.user_position(8)).to eq(false)
+    end
     
   end
 end
